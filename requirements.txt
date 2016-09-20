@@ -1,0 +1,7 @@
+setuptools
+bob.ip.base
+bob.bio.base
+bob.pad.base
+bob.bio.spear
+bob.bio.gmm
+bob.ap

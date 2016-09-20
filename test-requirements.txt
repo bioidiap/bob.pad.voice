@@ -1,0 +1,3 @@
+bob.measure
+bob.db.asvspoof
+bob.db.avspoof
