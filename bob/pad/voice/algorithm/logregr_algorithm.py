@@ -74,15 +74,15 @@ class LogRegrAlgorithm(Algorithm):
         # save the trained model to file for future use
         hdf5file = bob.io.base.HDF5File(projector_file, "w")
 
-        from antispoofing.utils.ml import norm
+        from bob.pad.voice.utils import extraction
 
         mean = None
         std = None
         # reduce the feature space using PCA
         if self.use_PCA_training or self.normalize_features:
-            mean, std = norm.calc_mean_std(real_features, attack_features, nonStdZero=True)
-            real_features = norm.zeromean_unitvar_norm(real_features, mean, std)
-            attack_features = norm.zeromean_unitvar_norm(attack_features, mean, std)
+            mean, std = extraction.calc_mean_std(real_features, attack_features, nonStdZero=True)
+            real_features = extraction.zeromean_unitvar_norm(real_features, mean, std)
+            attack_features = extraction.zeromean_unitvar_norm(attack_features, mean, std)
 
         if self.use_PCA_training:
             pca_trainer = bob.learn.linear.PCATrainer()
