@@ -68,7 +68,8 @@ def _spoof(parameters, cur_test_dir, sub_dir, score_types=('dev-real',), scores_
             # assert that the data order is still correct
             assert (data2check[0][:, 0:3] == data2check[1][:, 0:3]).all()
             # assert that the values are OK
-            assert numpy.allclose(data2check[0][:, 3].astype(float), data2check[1][:, 3].astype(float), 1e-5)
+            print (data2check)
+            assert numpy.allclose(data2check[0][:, 3].astype(float), data2check[1][:, 3].astype(float), 1e-3)
 
     finally:
         shutil.rmtree(cur_test_dir)
