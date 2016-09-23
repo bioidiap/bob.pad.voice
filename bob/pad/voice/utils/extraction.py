@@ -24,6 +24,48 @@ import logging
 logger = logging.getLogger("bob.pad.voice")
 
 
+def zeromean_unitvar_norm(data, mean, std):
+    """ Normalized the data with zero mean and unit variance. Mean and variance are in numpy.ndarray format"""
+    return numpy.divide(data - mean, std)
+
+
+def calc_mean(c0, c1=[]):
+    """ Calculates the mean of the data."""
+    if c1 != []:
+        return (numpy.mean(c0, 0) + numpy.mean(c1, 0)) / 2.
+    else:
+        return numpy.mean(c0, 0)
+
+
+def calc_std(c0, c1=[]):
+    """ Calculates the variance of the data."""
+    if c1 == []:
+        return numpy.std(c0, 0)
+    prop = float(len(c0)) / float(len(c1))
+    if prop < 1:
+        p0 = int(math.ceil(1 / prop))
+        p1 = 1
+    else:
+        p0 = 1
+        p1 = int(math.ceil(prop))
+    return numpy.std(numpy.vstack(p0 * [c0] + p1 * [c1]), 0)
+
+
+"""
+@param c0
+@param c1
+@param nonStdZero if the std was zero, convert to one. This will avoid a zero division
+"""
+def calc_mean_std(c0, c1=[], nonStdZero=False):
+    """ Calculates both the mean of the data. """
+    mi = calc_mean(c0, c1)
+    std = calc_std(c0, c1)
+    if (nonStdZero):
+        std[std == 0] = 1
+
+    return mi, std
+
+
 def vad_filter_features(vad_labels, features, filter_frames="trim_silence"):
     """ Trim the spectrogram to remove silent head/tails from the speech sample.
     Keep all remaining frames or either speech or non-speech only
@@ -69,7 +111,7 @@ def vad_filter_features(vad_labels, features, filter_frames="trim_silence"):
                 elif filter_frames == "speech_only":
                     filtered_features = features[speech, :]
                 else:  # when we take all
-                    filtered_features = features[nzstart:nzend+1, :]  # numpy slicing is a non-closed interval [)
+                    filtered_features = features[nzstart:nzend + 1, :]  # numpy slicing is a non-closed interval [)
         else:
             logger.error("vad_filter_features(): VAD labels should be the same length as energy bands")
 

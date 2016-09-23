@@ -69,15 +69,15 @@ class HistDistanceAlgorithm(Algorithm):
         # print ("Min attack ", numpy.min(attack_features))
         # print ("Max attack ", numpy.max(attack_features))
 
-        from antispoofing.utils.ml import norm
+        from bob.pad.voice.utils import extraction
 
         mean = None
         std = None
         # normalize features column-wise
         if self.normalize_features:
-            mean, std = norm.calc_mean_std(real_features, attack_features, nonStdZero=True)
-            real_features = norm.zeromean_unitvar_norm(real_features, mean, std)
-            attack_features = norm.zeromean_unitvar_norm(attack_features, mean, std)
+            mean, std = extraction.calc_mean_std(real_features, attack_features, nonStdZero=True)
+            real_features = extraction.zeromean_unitvar_norm(real_features, mean, std)
+            attack_features = extraction.zeromean_unitvar_norm(attack_features, mean, std)
 
         # compute average histogram for each type of features
         self.real_mean = numpy.mean(real_features, axis=0)
