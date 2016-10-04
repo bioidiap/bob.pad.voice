@@ -9,8 +9,7 @@ Presentation Attack Detection in Voice Biometrics
 
 This package is an extension to the ``bob.pad.base`` package, which provides the basic presentation attack detection (PAD) framework.
 
-The ``bob.pad.voice`` contains additional functionality to run PAD experiments using speech databases. ]
-Wrappers for speech databases are also included in this package.
+The ``bob.pad.voice`` contains additional functionality to run PAD experiments using speech databases.
 
 
 Installation
