@@ -54,7 +54,7 @@ setup(
     url='https://gitlab.idiap.ch/bob/bob.pad.voice',
     license='GPLv3',
     author='Pavel Korshunov',
-    author_email='pavel.korshunov@idiap.ch',
+    author_email='<andre.anjos@idiap.ch>',
     keywords="presentation attack detection, voice biometrics, speech",
 
     # If you have a better, long description of your package, place it on the
@@ -102,13 +102,6 @@ setup(
         'console_scripts': [
         ],
 
-        'bob.bio.database': [
-            'avspoof-licit             = bob.pad.voice.config.database.avspoof_verify:database_licit',
-            'avspoof-spoof             = bob.pad.voice.config.database.avspoof_verify:database_spoof',
-            'asvspoof-licit             = bob.pad.voice.config.database.asvspoof_verify:database_licit',
-            'asvspoof-spoof             = bob.pad.voice.config.database.asvspoof_verify:database_spoof',
-        ],
-
         # bob database declaration for the dummy test database
         'bob.db': [
             'dummy-speech = bob.pad.voice.test.dummy.database:Interface',  # driver for bobdb_manage
@@ -118,6 +111,7 @@ setup(
             'dummy-speech            = bob.pad.voice.test.dummy.database:database',
             'avspoof            = bob.pad.voice.config.database.avspoof:database',
             'asvspoof            = bob.pad.voice.config.database.asvspoof:database',
+            'voicepa            = bob.pad.voice.config.database.voicepa:database',
         ],
 
         'bob.pad.algorithm': [
@@ -131,16 +125,6 @@ setup(
             'gmm  = bob.pad.voice.algorithm.gmm_algorithm:algorithm',
             # the same as above but with smaller thresholds
             'gmm-scfc  = bob.pad.voice.config.algorithm.gmm_scfc:algorithm',
-        ],
-
-        'bob.bio.algorithm': [
-            'ivec-avspoof  = bob.pad.voice.config.algorithm.ivec_avspoof:algorithm',
-            # I-Vector config used for AVspoof
-            'isv-avspoof  = bob.pad.voice.config.algorithm.isv_avspoof:algorithm',  # ISV config used for AVspoof
-            # GMM training algorithm as per the paper "A Comparison of Features for Synthetic Speech Detection"
-            'gmm-tomi  = bob.pad.voice.config.algorithm.gmm_tomi:algorithm',
-            # the same as above but with smaller thresholds
-            'gmm-tomi-scfc  = bob.pad.voice.config.algorithm.gmm_tomi_scfc:algorithm',
         ],
 
         'bob.pad.preprocessor': [
@@ -160,45 +144,24 @@ setup(
             'ratios  = bob.pad.voice.extractor.ratios:extractor',
 
             # SSFCs with delta and delta-delta, plus mod_4hz labels
-            'ssfc20  = bob.pad.voice.config.extractor.ssfc20:extractor',
+            'ssfc20  = bob.bio.spear.config.extractor.ssfc20:extractor',
             # SCFCs with delta and delta-delta, plus mod_4hz labels
-            'scfc20  = bob.pad.voice.config.extractor.scfc20:extractor',
+            'scfc20  = bob.bio.spear.config.extractor.scfc20:extractor',
             # SCMCs with delta and delta-delta, plus mod_4hz labels
-            'scmc20  = bob.pad.voice.config.extractor.scmc20:extractor',
+            'scmc20  = bob.bio.spear.config.extractor.scmc20:extractor',
             # RFCCs with delta and delta-delta, plus mod_4hz labels
-            'rfcc20  = bob.pad.voice.config.extractor.rfcc20:extractor',
+            'rfcc20  = bob.bio.spear.config.extractor.rfcc20:extractor',
             # MFCC with delta and delta-delta, plus mod_4hz labels
-            'mfcc20  = bob.pad.voice.config.extractor.mfcc20:extractor',
+            'mfcc20  = bob.bio.spear.config.extractor.mfcc20:extractor',
             # IMFCC with delta and delta-delta, plus mod_4hz labels
-            'imfcc20  = bob.pad.voice.config.extractor.imfcc20:extractor',
+            'imfcc20  = bob.bio.spear.config.extractor.imfcc20:extractor',
             # LFCCs with delta and delta-delta, plus mod_4hz labels
-            'lfcc20  = bob.pad.voice.config.extractor.lfcc20:extractor',
+            'lfcc20  = bob.bio.spear.config.extractor.lfcc20:extractor',
 
-        ],
-
-        'bob.bio.extractor': [
-            # SSFCs with delta and delta-delta, plus mod_4hz labels
-            'ssfc20  = bob.pad.voice.config.extractor.ssfc20:extractor',
-            # SCFCs with delta and delta-delta, plus mod_4hz labels
-            'scfc20  = bob.pad.voice.config.extractor.scfc20:extractor',
-            # SCMCs with delta and delta-delta, plus mod_4hz labels
-            'scmc20  = bob.pad.voice.config.extractor.scmc20:extractor',
-            # RFCCs with delta and delta-delta, plus mod_4hz labels
-            'rfcc20  = bob.pad.voice.config.extractor.rfcc20:extractor',
-            # MFCC with delta and delta-delta, plus mod_4hz labels
-            'mfcc20  = bob.pad.voice.config.extractor.mfcc20:extractor',
-            # IMFCC with delta and delta-delta, plus mod_4hz labels
-            'imfcc20  = bob.pad.voice.config.extractor.imfcc20:extractor',
-            # LFCCs with delta and delta-delta, plus mod_4hz labels
-            'lfcc20  = bob.pad.voice.config.extractor.lfcc20:extractor',
-        ],
-
-        'bob.bio.grid': [
-            'modest         = bob.pad.voice.config.grid.modest:grid',
         ],
 
         'bob.pad.grid': [
-            'modest         = bob.pad.voice.config.grid.modest:grid',
+            'modest         = bob.bio.spear.config.grid.modest:grid',
         ],
     },
 
