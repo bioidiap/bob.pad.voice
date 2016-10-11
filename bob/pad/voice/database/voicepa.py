@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 # vim: set fileencoding=utf-8 :
 # Pavel Korshunov <pavel.korshunov@idiap.ch>
-# Tue 17 May 15:43:22 CEST 2016
+# Tue 11 Oct 15:43:22 2016
 
 """
-  This is a high level interface for presentation attack AVspoof database.
+  This is a high level interface for presentation attack voicePA database.
   It is an extension of an interface defined inside bob.pad.base PAD framework.
 """
 
@@ -12,37 +12,37 @@ from bob.pad.voice.database import PadVoiceFile
 from bob.pad.base.database import PadDatabase
 
 
-class AVspoofPadFile(PadVoiceFile):
+class VoicePAPadFile(PadVoiceFile):
     def __init__(self, f):
         """
-        Initializes this File object with an File equivalent from the underlying SQl-based interface for
-        AVspoof database.
+        Initializes this File object with a File equivalent from the underlying SQl-based interface for
+        voicePA database.
         """
         attacktype = None
         if f.is_attack():
             attacktype = str(f.get_attack())
 
-        super(AVspoofPadFile, self).__init__(client_id=f.client_id, path=f.path, attack_type=attacktype, file_id=f.id)
+        super(VoicePAPadFile, self).__init__(client_id=f.client_id, path=f.path, attack_type=attacktype, file_id=f.id)
 
         self.__f = f
 
 
-class AVspoofPadDatabase(PadDatabase):
+class VoicePAPadDatabase(PadDatabase):
     """
-    Implements verification API for querying AVspoof database.
+    Implements verification API for querying voicePA database.
     """
 
     def __init__(self, protocol='grandtest', **kwargs):
         # call base class constructors to open a session to the database
-        PadDatabase.__init__(self, name='avspoof', protocol=protocol, **kwargs)
+        PadDatabase.__init__(self, name='voicepa', protocol=protocol, **kwargs)
 
-        from bob.db.avspoof.query import Database as LowLevelDatabase
+        from bob.db.voicepa.query import Database as LowLevelDatabase
         self.__db = LowLevelDatabase()
 
         # Since the high level API expects different group names than what the low
         # level API offers, you need to convert them when necessary
-        self.low_level_group_names = ('train', 'devel', 'test')
-        self.high_level_group_names = ('train', 'dev', 'eval')
+        # self.low_level_group_names = ('train', 'dev', 'eval')
+        # self.high_level_group_names = ('train', 'dev', 'eval')
 
     def objects(self, groups=None, protocol=None, purposes=None, model_ids=None, **kwargs):
         """Returns a set of Files for the specific query by the user.
@@ -50,7 +50,7 @@ class AVspoofPadDatabase(PadDatabase):
         Keyword Parameters:
 
         groups
-            One of the groups ('dev', 'eval', 'train') or a tuple with several of them.
+            One of the groups ('train', 'dev', 'eval') or a tuple with several of them.
             If 'None' is given (this is the default), it is considered the same as a
             tuple with all possible values.
 
@@ -68,9 +68,10 @@ class AVspoofPadDatabase(PadDatabase):
 
         Returns: A set of Files with the specified properties.
         """
-        # convert group names from the conventional in PAD experiments to the internal database names
-        matched_groups = self.convert_names_to_lowlevel(
-            groups, self.low_level_group_names, self.high_level_group_names)
+        # we do not need to convert group names, since we have the same ('train', 'dev', 'eval') names as
+        # high level API
+        # matched_groups = self.convert_names_to_lowlevel(
+        #     groups, self.low_level_group_names, self.high_level_group_names)
 
-        objects = self.__db.objects(protocol=protocol, groups=matched_groups, cls=purposes, **kwargs)
-        return [AVspoofPadFile(f) for f in objects]
+        objects = self.__db.objects(protocol=protocol, groups=groups, cls=purposes, **kwargs)
+        return [VoicePAPadFile(f) for f in objects]

@@ -4,9 +4,8 @@
 # Tue 17 May 15:43:22 CEST 2016
 
 """
-  ASVspoof database implementation of bob.db.verification.utils.Database interface.
-  It is an extension of an SQL-based database interface, which directly talks to ASVspoof database, for
-  verification experiments (good to use in bob.pad.base framework).
+  This is a high level interface for presentation attack ASVspoof database.
+  It is an extension of an interface defined inside bob.pad.base PAD framework.
 """
 
 from bob.pad.voice.database import PadVoiceFile

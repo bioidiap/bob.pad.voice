@@ -1,5 +1,5 @@
 
-import bob.pad.voice.extractor
+import bob.bio.spear.extractor
 
 """
 This LBP-based feature extraction is implemented based on the paper
@@ -13,7 +13,7 @@ of the signal. Histogram size is 58 (as lbp_uniform LBP8,1 has 58 different valu
 GLCMs are not computed for top and bottom row of the spectrogram. Hence, the resulted size of the feature vector is 2842.
 """
 
-lfcc16_eurecom = bob.pad.voice.extractor.CepstralExtended(
+lfcc16_eurecom = bob.bio.spear.extractor.CepstralExtended(
     # the parameters are as specified in the paper by Eurecom
     # Federico Alegre, Ravichander Vipperla, Asmaa Amehraye, Nicholas Evans.
     # "A new speaker verification spoofing countermeasure based on local binary patterns".

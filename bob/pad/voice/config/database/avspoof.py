@@ -4,8 +4,7 @@ import bob.pad.voice.database
 
 
 # directory where the wave files are stored
-avspoof_input_dir = "/idiap/project/lobi/AVSpoof/data/"  # folder at Idiap
-# avspoof_input_dir = "/Users/pavelkor/Documents/pav/idiap/data/AVspoof_full/data/"  # local copy
+avspoof_input_dir = "[YOUR_AVSPOOF_WAV_DIRECTORY]"
 avspoof_input_ext = ".wav"
 
 
