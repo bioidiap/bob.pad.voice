@@ -11,3 +11,4 @@ py:class bob.bio.base.database.file.BioFile
 py:class bob.pad.voice.extractor.ratios.Ratios
 py:class bob.pad.voice.extractor.lbps.LBPs
 py:class bob.pad.base.algorithm.Algorithm.Algorithm
+py:exc ValueError
