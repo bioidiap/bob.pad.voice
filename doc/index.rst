@@ -10,5 +10,20 @@ Presentation Attack Detection in Voice Biometrics
 
 This package is an extension of the ``bob.pad.base`` presentation attack detection (PAD) framework package for voice biometrics.
 
+==================================
+Tools implemented in bob.pad.voice
+==================================
 
+Extractors
+----------
+.. automodule:: bob.pad.voice.extractor
 
+Algorithms
+----------
+
+.. automodule:: bob.pad.voice.algorithm
+
+Databases
+---------
+
+.. automodule:: bob.pad.voice.database

@@ -1,6 +1,6 @@
 import numpy
 
-from .ratios import Ratios
+from bob.pad.voice.extractor import Ratios
 import math
 
 import logging
