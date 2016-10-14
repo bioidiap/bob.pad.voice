@@ -4,7 +4,7 @@ import bob.ip.base
 
 import bob.sp
 
-from .lbps import LBPs
+from bob.pad.voice.extractor import LBPs
 
 import logging
 
