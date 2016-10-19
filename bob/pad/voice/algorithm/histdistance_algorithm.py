@@ -1,3 +1,9 @@
+#!/usr/bin/env python
+# vim: set fileencoding=utf-8 :
+# @author: Pavel Korshunov <pavel.korshunov@idiap.ch>
+# @date: Wed 19 Oct 23:43:22 2016
+
+
 import bob.io.base
 
 import numpy
