@@ -1,14 +1,8 @@
 py:class File
 py:class BioFile
 py:class BioFileSet
-py:class bob.pad.base.database.PadFile
-py:class bob.pad.base.database.file.PadFile
 py:class bob.bio.base.database.database.BioDatabase
-py:class bob.pad.base.database.database.PadDatabase
 py:class bob.bio.base.preprocessor.Preprocessor.Preprocessor
 py:class bob.bio.base.extractor.Extractor.Extractor
 py:class bob.bio.base.database.file.BioFile
-py:class bob.pad.voice.extractor.ratios.Ratios
-py:class bob.pad.voice.extractor.lbps.LBPs
-py:class bob.pad.base.algorithm.Algorithm.Algorithm
 py:exc ValueError
