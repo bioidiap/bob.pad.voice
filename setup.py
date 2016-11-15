@@ -115,6 +115,7 @@ setup(
         ],
 
         'bob.pad.algorithm': [
+            'tensorflow  = bob.pad.voice.algorithm.tensorflow_algorithm:algorithm',
             'dummy-algo  = bob.pad.voice.algorithm.dummy_algorithm:algorithm',
             # compute scores based on different energy bands
             'logregr  = bob.pad.voice.algorithm.logregr_algorithm:algorithm',
@@ -128,6 +129,7 @@ setup(
         ],
 
         'bob.pad.preprocessor': [
+            'dummytfp            = bob.pad.voice.extractor.dummy_tensorflow:dummytf',  # For tensorflow
             'energy-2gauss = bob.bio.spear.config.preprocessor.energy_2gauss:preprocessor',  # two Gauss energy
             'energy-thr        = bob.bio.spear.config.preprocessor.energy_thr:preprocessor',
             # thresholded energy
@@ -136,6 +138,7 @@ setup(
         ],
 
         'bob.pad.extractor': [
+            'dummytfe            = bob.pad.voice.extractor.dummy_tensorflow:dummytf',  # For tensorflow
             'glcms              =  bob.pad.voice.extractor.glcms:extractor',
             'lbp-hist              =  bob.pad.voice.extractor.lbp_histograms:extractor',
             # LBP-based features as per the paper from Eurecom

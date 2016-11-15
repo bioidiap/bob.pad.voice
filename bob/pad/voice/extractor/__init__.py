@@ -4,6 +4,7 @@ from .vectors_ratios import VectorsRatios
 from .glcms import GLCMs
 from .spectrogram_extended import SpectrogramExtended
 from .lbp_histograms import LBPHistograms
+from .dummy_tensorflow import DummyTF
 
 # gets sphinx autodoc done right - don't remove it
 def __appropriate__(*args):
@@ -26,5 +27,6 @@ __appropriate__(
     GLCMs,
     SpectrogramExtended,
     LBPHistograms,
+    DummyTF,
     )
 __all__ = [_ for _ in dir() if not _.startswith('_')]
