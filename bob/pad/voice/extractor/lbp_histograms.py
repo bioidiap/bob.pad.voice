@@ -1,10 +1,15 @@
+#!/usr/bin/env python
+# vim: set fileencoding=utf-8 :
+# Pavel Korshunov <pavel.korshunov@idiap.ch>
+# Tue 17 May 15:43:22 CEST 2016
+
 import numpy
 import bob.io.base
 import bob.ip.base
 
 import bob.sp
 
-from .lbps import LBPs
+from bob.pad.voice.extractor import LBPs
 
 import logging
 

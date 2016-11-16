@@ -1,6 +1,11 @@
+#!/usr/bin/env python
+# vim: set fileencoding=utf-8 :
+# Pavel Korshunov <pavel.korshunov@idiap.ch>
+# Tue 17 May 15:43:22 CEST 2016
+
 import numpy
 
-from .ratios import Ratios
+from bob.pad.voice.extractor import Ratios
 import math
 
 import logging

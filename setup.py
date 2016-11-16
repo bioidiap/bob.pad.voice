@@ -49,13 +49,13 @@ setup(
     # information before releasing code publicly.
     name='bob.pad.voice',
     version=open("version.txt").read().rstrip(),
-    description='Package extends bob.pad.base for voice biometrics',
+    description='Package extends bob.pad.base for attack detection in speech',
 
     url='https://gitlab.idiap.ch/bob/bob.pad.voice',
     license='GPLv3',
     author='Pavel Korshunov',
-    author_email='<andre.anjos@idiap.ch>',
-    keywords="presentation attack detection, voice biometrics, speech",
+    author_email='<pavel.korshunov@idiap.ch>',
+    keywords="presentation attack detection, voice biometrics, framework",
 
     # If you have a better, long description of your package, place it on the
     # 'doc' directory and then hook it here

@@ -9,3 +9,4 @@ bob.db.base
 bob.db.avspoof
 bob.db.asvspoof
 bob.db.voicepa
+bob.io.base
