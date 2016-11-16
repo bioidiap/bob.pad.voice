@@ -5,3 +5,7 @@ bob.pad.base
 bob.bio.spear
 bob.bio.gmm
 bob.ap
+bob.db.base
+bob.db.avspoof
+bob.db.asvspoof
+bob.db.voicepa
