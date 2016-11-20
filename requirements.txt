@@ -6,3 +6,5 @@ bob.bio.spear
 bob.bio.gmm
 bob.ap
 bob.io.base
+bob.pad.db
+bob.learn.tensorflow
