@@ -9,7 +9,7 @@ voicepa_input_ext = ".wav"
 
 
 database = bob.pad.voice.database.VoicePAPadDatabase(
-    protocol='greattest',
+    protocol='grandtest',
     original_directory=voicepa_input_dir,
     original_extension=voicepa_input_ext,
     training_depends_on_protocol=True,
