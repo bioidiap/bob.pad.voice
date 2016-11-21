@@ -112,6 +112,7 @@ setup(
             'avspoof            = bob.pad.voice.config.database.avspoof:database',
             'asvspoof            = bob.pad.voice.config.database.asvspoof:database',
             'voicepa            = bob.pad.voice.config.database.voicepa:database',
+            'cpqd_replay            = bob.pad.voice.config.database.cpqd_replay:database',
         ],
 
         'bob.pad.algorithm': [

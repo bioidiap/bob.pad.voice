@@ -73,5 +73,5 @@ class CPqDReplayPadDatabase(PadDatabase):
         # matched_groups = self.convert_names_to_lowlevel(
         #     groups, self.low_level_group_names, self.high_level_group_names)
 
-        objects = self.__db.objects(protocol=protocol, groups=groups, cls=purposes, **kwargs)
+        objects = self.__db.objects(protocol=protocol, groups=groups, purposes=purposes, **kwargs)
         return [CPqDReplayPadFile(f) for f in objects]

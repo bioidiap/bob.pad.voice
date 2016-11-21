@@ -4,7 +4,7 @@ from bob.pad.voice.database import CPqDReplayPadDatabase
 
 
 # directory where the wave files are stored
-voicepa_input_dir = "[YOUR_CPQDREPLAY_WAV_DIRECTORY]"
+voicepa_input_dir = "/idiap/resource/database/CPqD/"
 voicepa_input_ext = ".wav"
 
 
