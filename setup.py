@@ -130,6 +130,7 @@ setup(
         ],
 
         'bob.pad.preprocessor': [
+            'cqcc20p            = bob.bio.spear.config.extractor.cqcc20:cqcc20',  # Empty preprocessor for CQCC features
             'dummytfp            = bob.pad.voice.extractor.dummy_tensorflow:dummytf',  # For tensorflow
             'energy-2gauss = bob.bio.spear.config.preprocessor.energy_2gauss:preprocessor',  # two Gauss energy
             'energy-thr        = bob.bio.spear.config.preprocessor.energy_thr:preprocessor',
@@ -139,6 +140,7 @@ setup(
         ],
 
         'bob.pad.extractor': [
+            'cqcc20e = bob.bio.spear.config.extractor.cqcc20:cqcc20',  # Extractor (reads Matlab files) for CQCC features
             'dummytfe            = bob.pad.voice.extractor.dummy_tensorflow:dummytf',  # For tensorflow
             'glcms              =  bob.pad.voice.extractor.glcms:extractor',
             'lbp-hist              =  bob.pad.voice.extractor.lbp_histograms:extractor',

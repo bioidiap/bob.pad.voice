@@ -4,8 +4,8 @@ import bob.pad.voice.database
 
 
 # directory where the wave files are stored
-asvspoof_input_dir = "[YOUR_AVSPOOF_WAV_DIRECTORY]"
-asvspoof_input_ext = ".wav"
+asvspoof_input_dir = "/idiap/temp/pkorshunov/avspoof_cqcc/ASVspoof_d3"
+asvspoof_input_ext = ".mat"
 
 
 database = bob.pad.voice.database.ASVspoofPadDatabase(
