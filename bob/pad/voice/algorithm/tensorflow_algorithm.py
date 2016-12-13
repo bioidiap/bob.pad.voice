@@ -32,11 +32,11 @@ class TensorflowAlgo(Algorithm):
         )
 
         self.data_reader = DiskAudio([0], [0])
-        self.session = tf.Session()
+#        self.session = tf.Session()
         self.dnn_model = None
 
-    def __del__(self):
-        self.session.close()
+#    def __del__(self):
+#        self.session.close()
 
     def _check_feature(self, feature):
         """Checks that the features are appropriate."""
@@ -47,7 +47,8 @@ class TensorflowAlgo(Algorithm):
     def load_projector(self, projector_file):
         logger.info("Loading pretrained model from {0}".format(projector_file))
         self.dnn_model = SequenceNetwork()
-        self.dnn_model.load(bob.io.base.HDF5File(projector_file), session=self.session)
+#        self.dnn_model.load(bob.io.base.HDF5File(projector_file), session=self.session)
+        self.dnn_model.load(projector_file, True)
 
     def project_feature(self, feature):
 
@@ -56,8 +57,9 @@ class TensorflowAlgo(Algorithm):
         frames = numpy.asarray(frames)
         logger.debug(" .... And %d frames are extracted to pass into DNN model" % frames.shape[0])
         frames = numpy.reshape(frames, (frames.shape[0], -1, 1))
-        forward_output = self.dnn_model(frames, session=self.session)
-        return tf.nn.log_softmax(tf.nn.log_softmax(forward_output)).eval(session=self.session)
+        forward_output = self.dnn_model(frames)
+#        return tf.nn.log_softmax(tf.nn.log_softmax(forward_output)).eval(session=self.session)
+        return forward_output
 
     def project(self, feature):
         """project(feature) -> projected
