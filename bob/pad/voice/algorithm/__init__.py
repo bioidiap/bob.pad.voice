@@ -1,9 +1,6 @@
 from .gmm_algorithm import GmmAlgorithm
 from .logregr_algorithm import LogRegrAlgorithm
-
-# to fix sphinx warnings of not able to find classes, when path is shortened
-GmmAlgorithm.__module__ = "bob.pad.voice.algorithm"
-LogRegrAlgorithm.__module__ = "bob.pad.voice.algorithm"
+from .tensorflow_algorithm import TensorflowAlgo
 
 # gets sphinx autodoc done right - don't remove it
 def __appropriate__(*args):
@@ -22,5 +19,6 @@ def __appropriate__(*args):
 __appropriate__(
     GmmAlgorithm,
     LogRegrAlgorithm,
+    TensorflowAlgo,
     )
 __all__ = [_ for _ in dir() if not _.startswith('_')]

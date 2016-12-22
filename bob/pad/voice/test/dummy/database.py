@@ -61,9 +61,10 @@ class Interface(BaseInterface):
         return '0.0.1'
 
     def files(self):
-        from pkg_resources import resource_filename
-        raw_files = ('*.wav',)
-        return [resource_filename(__name__, k) for k in raw_files]
+        # from pkg_resources import resource_filename
+        # raw_files = ('*.wav',)
+        # return [resource_filename(__name__, k) for k in raw_files]
+        return ()
 
     def type(self):
         return 'rawfiles'

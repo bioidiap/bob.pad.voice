@@ -112,9 +112,11 @@ setup(
             'avspoof            = bob.pad.voice.config.database.avspoof:database',
             'asvspoof            = bob.pad.voice.config.database.asvspoof:database',
             'voicepa            = bob.pad.voice.config.database.voicepa:database',
+            'cpqd_replay            = bob.pad.voice.config.database.cpqd_replay:database',
         ],
 
         'bob.pad.algorithm': [
+            'tensorflow  = bob.pad.voice.algorithm.tensorflow_algorithm:algorithm',
             'dummy-algo  = bob.pad.voice.algorithm.dummy_algorithm:algorithm',
             # compute scores based on different energy bands
             'logregr  = bob.pad.voice.algorithm.logregr_algorithm:algorithm',
@@ -128,6 +130,8 @@ setup(
         ],
 
         'bob.pad.preprocessor': [
+            'cqcc20p            = bob.bio.spear.config.extractor.cqcc20:cqcc20',  # Empty preprocessor for CQCC features
+            'dummytfp            = bob.pad.voice.extractor.dummy_tensorflow:dummytf',  # For tensorflow
             'energy-2gauss = bob.bio.spear.config.preprocessor.energy_2gauss:preprocessor',  # two Gauss energy
             'energy-thr        = bob.bio.spear.config.preprocessor.energy_thr:preprocessor',
             # thresholded energy
@@ -136,6 +140,8 @@ setup(
         ],
 
         'bob.pad.extractor': [
+            'cqcc20e = bob.bio.spear.config.extractor.cqcc20:cqcc20',  # Extractor (reads Matlab files) for CQCC features
+            'dummytfe            = bob.pad.voice.extractor.dummy_tensorflow:dummytf',  # For tensorflow
             'glcms              =  bob.pad.voice.extractor.glcms:extractor',
             'lbp-hist              =  bob.pad.voice.extractor.lbp_histograms:extractor',
             # LBP-based features as per the paper from Eurecom
