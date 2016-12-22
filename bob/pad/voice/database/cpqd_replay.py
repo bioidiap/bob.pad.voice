@@ -9,7 +9,7 @@
 """
 
 from bob.pad.voice.database import PadVoiceFile
-from bob.pad.db import PadDatabase
+from bob.pad.base.database import PadDatabase
 
 
 class CPqDReplayPadFile(PadVoiceFile):
