@@ -1,5 +1,6 @@
 from .database import PadVoiceFile
 from .asvspoof import ASVspoofPadDatabase
+from .asvspoof2017 import ASVspoof2017PadDatabase
 from .avspoof import AVspoofPadDatabase
 from .replay import ReplayPadDatabase
 from .replaymobile import ReplayMobilePadDatabase
@@ -28,5 +29,6 @@ __appropriate__(
     ReplayMobilePadDatabase,
     VoicePAPadDatabase,
     CPqDReplayPadDatabase,
+    ASVspoof2017PadDatabase,
     )
 __all__ = [_ for _ in dir() if not _.startswith('_')]
