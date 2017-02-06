@@ -4,7 +4,7 @@ import bob.pad.voice.database
 
 
 # directory where the wave files are stored
-asvspoof_input_dir = "/idiap/group/biometric/databases/pad/ASVspoof2017/ASVspoof2017_train_dev"
+asvspoof_input_dir = "[YOUR_ASVSPOOF2017_WAV_DIRECTORY]"
 asvspoof_input_ext = ".wav"
 
 
