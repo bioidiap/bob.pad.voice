@@ -50,8 +50,8 @@ class GmmAlgorithm (Algorithm):
         INIT_SEED = INIT_SEED,
       # parameters of detection pipeline
         performs_projection = True,
-        requires_projector_training = True,
-        use_projected_features_for_enrollment = True,
+        requires_projector_training = False,
+        use_projected_features_for_enrollment = False,
         multiple_model_scoring = None,
     )
     # copy parameters

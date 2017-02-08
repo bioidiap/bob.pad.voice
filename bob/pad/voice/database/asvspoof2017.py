@@ -48,7 +48,7 @@ class ASVspoof2017PadDatabase(PadDatabase):
 
         if names is None:
             return None
-        mapping = dict(zip(low_level_names, high_level_names))
+        mapping = dict(zip(high_level_names, low_level_names))
         if isinstance(names, str):
             return mapping.get(names)
         return [mapping[g] for g in names]
