@@ -142,6 +142,7 @@ setup(
 
         'bob.pad.extractor': [
             'cqcc20e = bob.bio.spear.config.extractor.cqcc20:cqcc20',  # Extractor (reads Matlab files) for CQCC features
+            'audiotf            = bob.pad.voice.extractor.audio_tensorflow:audiotf',  # For audio tensorflow
             'dummytfe            = bob.pad.voice.extractor.dummy_tensorflow:dummytf',  # For tensorflow
             'glcms              =  bob.pad.voice.extractor.glcms:extractor',
             'lbp-hist              =  bob.pad.voice.extractor.lbp_histograms:extractor',
@@ -165,6 +166,10 @@ setup(
             # LFCCs with delta and delta-delta, plus mod_4hz labels
             'lfcc20  = bob.bio.spear.config.extractor.lfcc20:extractor',
 
+        ],
+
+        'bob.bio.extractor': [
+            'audiotf            = bob.pad.voice.extractor.audio_tensorflow:audiotf',  # For audio tensorflow
         ],
 
         'bob.pad.grid': [

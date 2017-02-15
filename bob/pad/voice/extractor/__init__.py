@@ -5,6 +5,7 @@ from .glcms import GLCMs
 from .spectrogram_extended import SpectrogramExtended
 from .lbp_histograms import LBPHistograms
 from .dummy_tensorflow import DummyTF
+from .audio_tensorflow import AudioTFExtractor
 
 # gets sphinx autodoc done right - don't remove it
 def __appropriate__(*args):
@@ -28,5 +29,6 @@ __appropriate__(
     SpectrogramExtended,
     LBPHistograms,
     DummyTF,
+    AudioTFExtractor,
     )
 __all__ = [_ for _ in dir() if not _.startswith('_')]
