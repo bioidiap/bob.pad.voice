@@ -168,6 +168,11 @@ setup(
 
         ],
 
+        'bob.bio.preprocessor': [
+            # Just store WAV files 'as is' in HDF5
+            'dummytfp            = bob.pad.voice.extractor.dummy_tensorflow:dummytf',
+        ],
+
         'bob.bio.extractor': [
             'audiotf            = bob.pad.voice.extractor.audio_tensorflow:audiotf',  # For audio tensorflow
         ],

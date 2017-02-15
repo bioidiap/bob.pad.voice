@@ -33,7 +33,7 @@ class AudioTFExtractor(Extractor):
             **kwargs
     ):
 
-        Extractor.__init__(self, requires_training=True,  # it's True, so that extractor can be loaded from file
+        Extractor.__init__(self, requires_training=False,
                            split_training_data_by_client=False,
                            skip_extractor_training=True, **kwargs)
 
