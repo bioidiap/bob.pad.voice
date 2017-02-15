@@ -48,7 +48,7 @@ class ASVspoof2017PadDatabase(PadDatabase):
 
         if names is None:
             return None
-        mapping = dict(zip(low_level_names, high_level_names))
+        mapping = dict(zip(high_level_names, low_level_names))
         if isinstance(names, str):
             return mapping.get(names)
         return [mapping[g] for g in names]
@@ -78,5 +78,6 @@ class ASVspoof2017PadDatabase(PadDatabase):
         Returns: A set of Files with the specified properties.
         """
         purposes = self.convert_purposes(purposes, ('genuine', 'spoof'), ('real', 'attack'))
+
         objects = self.__db.objects(protocol=protocol, groups=groups, purposes=purposes, **kwargs)
         return [ASVspoof2017PadFile(f) for f in objects]
