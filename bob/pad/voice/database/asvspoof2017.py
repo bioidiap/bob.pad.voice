@@ -78,5 +78,6 @@ class ASVspoof2017PadDatabase(PadDatabase):
         Returns: A set of Files with the specified properties.
         """
         purposes = self.convert_purposes(purposes, ('genuine', 'spoof'), ('real', 'attack'))
+
         objects = self.__db.objects(protocol=protocol, groups=groups, purposes=purposes, **kwargs)
         return [ASVspoof2017PadFile(f) for f in objects]
