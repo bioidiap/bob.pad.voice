@@ -79,5 +79,11 @@ class ASVspoof2017PadDatabase(PadDatabase):
         """
         purposes = self.convert_purposes(purposes, ('genuine', 'spoof'), ('real', 'attack'))
 
+        if protocol == 'largetrain':
+            if groups == 'train':
+                groups = ('train', 'dev')
+            if groups == 'dev':
+                groups = 'eval'
+
         objects = self.__db.objects(protocol=protocol, groups=groups, purposes=purposes, **kwargs)
         return [ASVspoof2017PadFile(f) for f in objects]
