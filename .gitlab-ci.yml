@@ -109,54 +109,69 @@ stages:
 # Build Targets
 # -------------
 
-
-# Linux + Python 3.6: Builds, tests and uploads wheel
-build_linux_36:
+# Linux + Python 2.7: Builds, tests, uploads wheel and deploys (if needed)
+build_linux_27:
   <<: *build_job
-  variables: &linux_36_build_variables
-    PYTHON_VERSION: "3.6"
-    WHEEL_TAG: "py3"
+  variables: &linux_27_build_variables
+    PYTHON_VERSION: "2.7"
+    WHEEL_TAG: "py27"
   tags:
     - conda-linux
 
-test_linux_36:
+test_linux_27:
   <<: *test_job
-  variables: *linux_36_build_variables
+  variables: *linux_27_build_variables
   dependencies:
-    - build_linux_36
+    - build_linux_27
   tags:
     - conda-linux
 
-wheels_linux_36:
+wheels_linux_27:
   <<: *wheels_job
-  variables: *linux_36_build_variables
+  variables: *linux_27_build_variables
   dependencies:
-    - build_linux_36
+    - build_linux_27
   tags:
     - conda-linux
 
-docs_linux_36:
-  <<: *docs_job
-  variables: *linux_36_build_variables
+deploy_linux_27:
+  <<: *deploy_job
+  variables: *linux_27_build_variables
   dependencies:
-    - build_linux_36
+    - build_linux_27
   tags:
     - conda-linux
 
 
-# Mac OSX + Python 3.6: Builds and tests
-build_macosx_36:
+# Linux + Python 3.5: Builds, tests and uploads wheel
+build_linux_35:
   <<: *build_job
-  variables: &macosx_36_build_variables
-    PYTHON_VERSION: "3.6"
+  variables: &linux_35_build_variables
+    PYTHON_VERSION: "3.5"
     WHEEL_TAG: "py3"
   tags:
-    - conda-macosx
+    - conda-linux
 
-test_macosx_36:
+test_linux_35:
   <<: *test_job
-  variables: *macosx_36_build_variables
+  variables: *linux_35_build_variables
   dependencies:
-    - build_macosx_36
+    - build_linux_35
   tags:
-    - conda-macosx
+    - conda-linux
+
+wheels_linux_35:
+  <<: *wheels_job
+  variables: *linux_35_build_variables
+  dependencies:
+    - build_linux_35
+  tags:
+    - conda-linux
+
+docs_linux_35:
+  <<: *docs_job
+  variables: *linux_35_build_variables
+  dependencies:
+    - build_linux_35
+  tags:
+    - conda-linux
