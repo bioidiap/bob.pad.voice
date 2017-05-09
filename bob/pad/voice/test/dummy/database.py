@@ -138,6 +138,8 @@ class DummyDatabaseSpeechSpoof(bob.pad.base.database.PadDatabase):
 
         return return_list
 
+    def annotations(self, file):
+        pass
 
 database = DummyDatabaseSpeechSpoof(
     protocol='Default',

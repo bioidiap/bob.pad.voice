@@ -38,15 +38,15 @@ class AudioTFExtractor(Extractor):
                            skip_extractor_training=True, **kwargs)
 
         # block parameters        
-        import tensorflow as tf
-        self.session = tf.Session()
+        # import tensorflow as tf
+        # self.session = tf.Session()
 
         # self.session = Session.instance().session
         self.feature_layer = feature_layer
 
         self.data_reader = DiskAudio([0], [0])
 
-        self.dnn_model = SequenceNetwork(default_feature_layer=feature_layer)
+        self.dnn_model = None
 
     def __call__(self, input_data):
         """
@@ -69,9 +69,9 @@ class AudioTFExtractor(Extractor):
 
     def load(self, extractor_file):
         logger.info("Loading pretrained model from {0}".format(extractor_file))
-        self.dnn_model = SequenceNetwork()
-        self.dnn_model.load_hdf5(bob.io.base.HDF5File(extractor_file), shape=[1, 6560, 1])
-        # self.dnn_model.load(extractor_file, clear_devices=True)
+        self.dnn_model = SequenceNetwork(default_feature_layer=self.feature_layer)
+        # self.dnn_model.load_hdf5(bob.io.base.HDF5File(extractor_file), shape=[1, 6560, 1])
+        self.dnn_model.load(extractor_file, clear_devices=True)
 
         #hdf5 = bob.io.base.HDF5File(extractor_file)
         #self.lenet.load(hdf5, shape=(1,125,125,3), session=self.session)
