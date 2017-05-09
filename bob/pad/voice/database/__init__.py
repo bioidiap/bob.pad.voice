@@ -5,7 +5,6 @@ from .avspoof import AVspoofPadDatabase
 from .replay import ReplayPadDatabase
 from .replaymobile import ReplayMobilePadDatabase
 from .voicepa import VoicePAPadDatabase
-from .cpqd_replay import CPqDReplayPadDatabase
 
 # gets sphinx autodoc done right - don't remove it
 def __appropriate__(*args):
@@ -28,7 +27,6 @@ __appropriate__(
     ReplayPadDatabase,
     ReplayMobilePadDatabase,
     VoicePAPadDatabase,
-    CPqDReplayPadDatabase,
     ASVspoof2017PadDatabase,
     )
 __all__ = [_ for _ in dir() if not _.startswith('_')]
