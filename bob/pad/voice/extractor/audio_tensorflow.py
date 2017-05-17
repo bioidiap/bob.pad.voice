@@ -5,14 +5,11 @@
 """Features for face recognition"""
 
 import numpy
-import bob.io.base
+# import bob.io.base
 from bob.bio.base.extractor import Extractor
-from bob.learn.tensorflow.network import SequenceNetwork
-from bob.learn.tensorflow.utils import Session
-from bob.learn.tensorflow.datashuffler import DiskAudio
 
-import bob.io.base
-import bob.ip.base
+# import bob.io.base
+# import bob.ip.base
 
 import logging
 
@@ -44,7 +41,7 @@ class AudioTFExtractor(Extractor):
         # self.session = Session.instance().session
         self.feature_layer = feature_layer
 
-        self.data_reader = DiskAudio([0], [0])
+        self.data_reader = None
 
         self.dnn_model = None
 
@@ -54,6 +51,10 @@ class AudioTFExtractor(Extractor):
         # create empty labels array, since this what read/write function of Base accepts
         rate = input_data[0]
         wav_sample = input_data[1]
+
+        from bob.learn.tensorflow.datashuffler import DiskAudio
+        if not self.data_reader:
+            self.data_reader = DiskAudio([0], [0])
 
         logger.debug(" .... Extracting frames on the fly from %d length sample" % wav_sample.shape[0])
         frames, labels = self.data_reader.extract_frames_from_wav(wav_sample, 0)
@@ -69,6 +70,7 @@ class AudioTFExtractor(Extractor):
 
     def load(self, extractor_file):
         logger.info("Loading pretrained model from {0}".format(extractor_file))
+        from bob.learn.tensorflow.network import SequenceNetwork
         self.dnn_model = SequenceNetwork(default_feature_layer=self.feature_layer)
         # self.dnn_model.load_hdf5(bob.io.base.HDF5File(extractor_file), shape=[1, 6560, 1])
         self.dnn_model.load(extractor_file, clear_devices=True)

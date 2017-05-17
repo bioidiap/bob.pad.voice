@@ -5,12 +5,10 @@
 
 from bob.pad.base.algorithm import Algorithm
 import numpy
-from bob.learn.tensorflow.network.SequenceNetwork import SequenceNetwork
-from bob.learn.tensorflow.datashuffler import DiskAudio
 
 import bob.io.base
 
-import tensorflow as tf
+# import tensorflow as tf
 
 import logging
 
@@ -31,7 +29,7 @@ class TensorflowAlgo(Algorithm):
             requires_projector_training=False,
         )
 
-        self.data_reader = DiskAudio([0], [0])
+        self.data_reader = None
         # self.session = tf.Session()
         self.dnn_model = None
 
@@ -46,6 +44,7 @@ class TensorflowAlgo(Algorithm):
 
     def load_projector(self, projector_file):
         logger.info("Loading pretrained model from {0}".format(projector_file))
+        from bob.learn.tensorflow.network.SequenceNetwork import SequenceNetwork
         self.dnn_model = SequenceNetwork()
         # self.dnn_model.load_hdf5(bob.io.base.HDF5File(projector_file), shape=[1, 6560, 1])
         self.dnn_model.load(projector_file, True)
@@ -53,6 +52,9 @@ class TensorflowAlgo(Algorithm):
     def project_feature(self, feature):
 
         logger.debug(" .... Projecting %d features vector" % feature.shape[0])
+        from bob.learn.tensorflow.datashuffler import DiskAudio
+        if not self.data_reader:
+            self.data_reader = DiskAudio([0], [0])
         frames, labels = self.data_reader.extract_frames_from_wav(feature, 0)
         frames = numpy.asarray(frames)
         logger.debug(" .... And %d frames are extracted to pass into DNN model" % frames.shape[0])
