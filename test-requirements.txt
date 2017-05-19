@@ -3,5 +3,3 @@ bob.io.image
 bob.measure
 bob.db.asvspoof
 bob.db.avspoof
-bob.db.voicepa
-bob.db.asvspoof2017
