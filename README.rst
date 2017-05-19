@@ -6,8 +6,8 @@
    :target: http://pythonhosted.org/bob.pad.voice/index.html
 .. image:: http://img.shields.io/badge/docs-latest-orange.png
    :target: https://www.idiap.ch/software/bob/docs/latest/bob/bob.pad.voice/master/index.html
-.. image:: https://gitlab.idiap.ch/bob/bob.pad.voice/badges/master/build.svg
-   :target: https://gitlab.idiap.ch/bob/bob.pad.voice/commits/master
+.. image:: https://gitlab.idiap.ch/bob/bob.pad.voice/badges/v1.0.4/build.svg
+   :target: https://gitlab.idiap.ch/bob/bob.pad.voice/commits/v1.0.4
 .. image:: https://img.shields.io/badge/gitlab-project-0000c0.svg
    :target: https://gitlab.idiap.ch/bob/bob.pad.voice
 .. image:: http://img.shields.io/pypi/v/bob.pad.voice.png
