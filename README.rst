@@ -3,9 +3,9 @@
 .. Thu 23 Jun 13:43:22 2016
 
 .. image:: http://img.shields.io/badge/docs-stable-yellow.png
-   :target: http://pythonhosted.org/bob.pad.voice/index.html
+   :target: https://www.idiap.ch/software/bob/docs/bob/bob.pad.voice/stable/index.html
 .. image:: http://img.shields.io/badge/docs-latest-orange.png
-   :target: https://www.idiap.ch/software/bob/docs/latest/bob/bob.pad.voice/master/index.html
+   :target: https://www.idiap.ch/software/bob/docs/bob/bob.pad.voice/master/index.html
 .. image:: https://gitlab.idiap.ch/bob/bob.pad.voice/badges/master/build.svg
    :target: https://gitlab.idiap.ch/bob/bob.pad.voice/commits/master
 .. image:: https://img.shields.io/badge/gitlab-project-0000c0.svg
