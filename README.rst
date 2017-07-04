@@ -12,8 +12,6 @@
    :target: https://gitlab.idiap.ch/bob/bob.pad.voice
 .. image:: http://img.shields.io/pypi/v/bob.pad.voice.png
    :target: https://pypi.python.org/pypi/bob.pad.voice
-.. image:: http://img.shields.io/pypi/dm/bob.pad.voice.png
-   :target: https://pypi.python.org/pypi/bob.pad.voice
 
 =================================================
 Presentation Attack Detection in Voice Biometrics
