@@ -121,6 +121,9 @@ class LSTMEval(Algorithm):
 
 #        frames = numpy.asarray(frames)
 #        logger.info(" .... And frames of shape {0} are extracted to pass into DNN model".format(frames.shape))
+        if frames is None:
+            return None
+
         if self.data_std:
             frames = numpy.divide(frames - self.data_mean, self.data_std)
 
@@ -140,6 +143,7 @@ class LSTMEval(Algorithm):
             else:
                 raise ValueError("Tensorflow session was not initialized, so cannot project on DNN model!")
         logger.info("Projected scores {0}".format(projections))
+
         return numpy.asarray(projections, dtype=numpy.float32)
 
     def project(self, feature):
