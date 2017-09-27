@@ -8,6 +8,7 @@ import numpy
 
 
 # import tensorflow as tf
+import os
 
 import logging
 
@@ -20,6 +21,7 @@ class LSTMEval(Algorithm):
     def __init__(self,
                  input_shape=[200, 81],  # [temporal_length, feature_size]
                  lstm_network_size=60,  # the output size of LSTM cell
+                 normalization_file=None,  # file with normalization parameters from train set
                  **kwargs):
         """Generates a test value that is read and written"""
 
@@ -34,6 +36,14 @@ class LSTMEval(Algorithm):
         self.input_shape = input_shape
         self.num_time_steps = input_shape[0]
         self.lstm_network_size = lstm_network_size
+        self.data_std = None
+        if normalization_file and os.path.exists(normalization_file):
+            npzfile = numpy.load(normalization_file)
+            self.data_mean = npzfile['data_mean']
+            self.data_std = npzfile['data_std']
+        else:
+            self.data_mean = 0
+            self.data_std = 1
 
         self.data_reader = None
         self.session = None
@@ -47,7 +57,7 @@ class LSTMEval(Algorithm):
                             num_time_steps=28, num_classes=10, seed=10, reuse=False):
         import tensorflow as tf
         from bob.learn.tensorflow.layers import lstm
-        slim = tf.contrib.slim
+#        slim = tf.contrib.slim
 
         if isinstance(train_data_shuffler, tf.Tensor):
             inputs = train_data_shuffler
@@ -66,6 +76,11 @@ class LSTMEval(Algorithm):
 #                                     weights_initializer=initializer, reuse=reuse)
 
         return graph
+
+    def normalize_data(self, features):
+        mean = numpy.mean(features, axis=0)
+        std = numpy.std(features, axis=0)
+        return numpy.divide(features - mean, std)
 
     def _check_feature(self, feature):
         """Checks that the features are appropriate."""
@@ -101,11 +116,20 @@ class LSTMEval(Algorithm):
             self.data_reader = DiskAudio([0], [0], [1] + self.input_shape)
         # frames, labels = self.data_reader.extract_frames_from_wav(feature, 0)
         frames, labels = self.data_reader.split_features_in_windows(features=feature, label=1,
-                                                                    win_size=self.num_time_steps)
+                                                                    win_size=self.num_time_steps,
+                                                                    sliding_step=5)
+
 #        frames = numpy.asarray(frames)
 #        logger.info(" .... And frames of shape {0} are extracted to pass into DNN model".format(frames.shape))
+        if self.data_std:
+            frames = numpy.divide(frames - self.data_mean, self.data_std)
+
         projections = numpy.zeros((len(frames), 2), dtype=numpy.float32)
-        for frame, i in zip(frames, range(len(frames))):
+        for i in range(frames.shape[0]):
+            # normalize frame using pre-loaded normalization parameters
+#            if self.data_std:
+#                frame = numpy.divide(frame - self.data_mean, self.data_std)
+            frame = frames[i]
             frame = numpy.reshape(frame, ([1] + list(frames[0].shape)))
 #        frames = numpy.reshape(frames, (frames.shape[0], -1, 1))
             logger.info(" .... projecting frame of shape {0} onto DNN model".format(frame.shape))
