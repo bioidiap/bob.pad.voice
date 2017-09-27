@@ -14,10 +14,12 @@ import logging
 logger = logging.getLogger("bob.pad.voice")
 
 
-class TensorflowAlgo(Algorithm):
+class LSTMEval(Algorithm):
     """This class is used to test all the possible functions of the tool chain, but it does basically nothing."""
 
     def __init__(self,
+                 input_shape=[200, 81],  # [temporal_length, feature_size]
+                 lstm_network_size=60,  # the output size of LSTM cell
                  **kwargs):
         """Generates a test value that is read and written"""
 
@@ -26,7 +28,12 @@ class TensorflowAlgo(Algorithm):
             self,
             performs_projection=True,
             requires_projector_training=False,
+            **kwargs
         )
+
+        self.input_shape = input_shape
+        self.num_time_steps = input_shape[0]
+        self.lstm_network_size = lstm_network_size
 
         self.data_reader = None
         self.session = None
@@ -70,9 +77,9 @@ class TensorflowAlgo(Algorithm):
         import tensorflow as tf
         if self.session is None:
             self.session = tf.Session()
-        data_pl = tf.placeholder(tf.float32, shape=(None, 60, 102))
+        data_pl = tf.placeholder(tf.float32, shape=(None, ) + tuple(self.input_shape))
         graph = self.simple_lstm_network(data_pl, batch_size=1,
-                                         lstm_cell_size=60, num_time_steps=60,
+                                         lstm_cell_size=self.lstm_network_size, num_time_steps=self.num_time_steps,
                                          num_classes=2, reuse=False)
 
         self.session.run(tf.global_variables_initializer())
@@ -91,9 +98,10 @@ class TensorflowAlgo(Algorithm):
         logger.info(" .... Projecting %d features vector" % feature.shape[0])
         from bob.learn.tensorflow.datashuffler import DiskAudio
         if not self.data_reader:
-            self.data_reader = DiskAudio([0], [0], [1, 60, 102])
+            self.data_reader = DiskAudio([0], [0], [1] + self.input_shape)
         # frames, labels = self.data_reader.extract_frames_from_wav(feature, 0)
-        frames, labels = self.data_reader.split_features_in_windows(feature, 0, 60)
+        frames, labels = self.data_reader.split_features_in_windows(features=feature, label=1,
+                                                                    win_size=self.num_time_steps)
 #        frames = numpy.asarray(frames)
 #        logger.info(" .... And frames of shape {0} are extracted to pass into DNN model".format(frames.shape))
         projections = numpy.zeros((len(frames), 2), dtype=numpy.float32)
@@ -144,7 +152,7 @@ class TensorflowAlgo(Algorithm):
           A score value for the object ``toscore``.
         """
         scores = numpy.asarray(toscore, dtype=numpy.float32)
-        real_scores = scores[:, 0]
+        real_scores = scores[:, 1]
         logger.debug("Mean score %f", numpy.mean(real_scores))
         return [numpy.mean(real_scores)]
 
@@ -155,4 +163,4 @@ class TensorflowAlgo(Algorithm):
         return [toscore[0]]
 
 
-algorithm = TensorflowAlgo()
+algorithm = LSTMEval()

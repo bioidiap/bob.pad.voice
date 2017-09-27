@@ -1,6 +1,6 @@
-from .gmm_algorithm import GmmAlgorithm
-from .logregr_algorithm import LogRegrAlgorithm
-from .tensorflow_algorithm import TensorflowAlgo
+from .GMM import GMM
+from .LogRegr import LogRegr
+from .LSTMEval import LSTMEval
 
 # gets sphinx autodoc done right - don't remove it
 def __appropriate__(*args):
@@ -17,8 +17,8 @@ def __appropriate__(*args):
   for obj in args: obj.__module__ = __name__
 
 __appropriate__(
-    GmmAlgorithm,
-    LogRegrAlgorithm,
-    TensorflowAlgo,
+    GMM,
+    LogRegr,
+    LSTMEval,
     )
 __all__ = [_ for _ in dir() if not _.startswith('_')]

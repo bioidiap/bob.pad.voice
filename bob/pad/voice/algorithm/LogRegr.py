@@ -16,7 +16,7 @@ import logging
 logger = logging.getLogger("bob.pad.voice")
 
 
-class LogRegrAlgorithm(Algorithm):
+class LogRegr(Algorithm):
     """Trains Logistical Regression classifier and projects testing dat on it."""
 
     def __init__(self, use_PCA_training=False, normalize_features=False, **kwargs):
@@ -69,8 +69,8 @@ class LogRegrAlgorithm(Algorithm):
                 [feat if self._check_feature(feat) else numpy.nan for feat in training_features[1]],
                 dtype=numpy.float64)
 
-        # print ("LogRegrAlgorithm:train_projector(), real_features shape:", real_features.shape)
-        # print ("LogRegrAlgorithm:train_projector(), attack_features shape:", attack_features.shape)
+        # print ("LogRegr:train_projector(), real_features shape:", real_features.shape)
+        # print ("LogRegr:train_projector(), attack_features shape:", attack_features.shape)
         # print ("Min real ", numpy.min(real_features))
         # print ("Max real ", numpy.max(real_features))
         # print ("Min attack ", numpy.min(attack_features))
@@ -130,8 +130,8 @@ class LogRegrAlgorithm(Algorithm):
                 self.machine.input_subtract = mean
                 self.machine.input_divide = std
 
-        # print ("LogRegrAlgorithm:train_projector(), machine shape: ", self.machine.shape)
-        # print ("LogRegrAlgorithm:train_projector(), machine weights: ", self.machine.weights)
+        # print ("LogRegr:train_projector(), machine shape: ", self.machine.shape)
+        # print ("LogRegr:train_projector(), machine weights: ", self.machine.weights)
 
         hdf5file.cd('/')
         hdf5file.create_group('LogRegProjector')
@@ -203,4 +203,4 @@ class LogRegrAlgorithm(Algorithm):
         return toscore
 
 
-algorithm = LogRegrAlgorithm()
+algorithm = LogRegr()
