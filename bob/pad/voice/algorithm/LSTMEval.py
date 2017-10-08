@@ -36,10 +36,20 @@ class LSTMEval(Algorithm):
         self.num_time_steps = input_shape[0]
         self.lstm_network_size = lstm_network_size
         self.data_std = None
+#        import ipdb
+#        ipdb.set_trace()
         if normalization_file and os.path.exists(normalization_file):
             npzfile = numpy.load(normalization_file)
             self.data_mean = npzfile['data_mean']
             self.data_std = npzfile['data_std']
+            if not self.data_std.shape:  # if std was saved as scalar
+                self.data_std = numpy.ones(input_shape)
+            if self.data_mean.shape[0] > input_shape[0]:
+                self.data_mean = self.data_mean[:input_shape[0]]
+            self.data_mean = numpy.reshape(self.data_mean, input_shape)
+            if self.data_std.shape[0] > input_shape[0]:
+                self.data_std = self.data_std[:input_shape[0]]
+            self.data_std = numpy.reshape(self.data_std, input_shape)
         else:
             self.data_mean = 0
             self.data_std = 1
@@ -65,7 +75,7 @@ class LSTMEval(Algorithm):
         # Creating an LSTM network
         graph = lstm(inputs, lstm_cell_size, num_time_steps=num_time_steps, batch_size=batch_size,
                      output_activation_size=num_classes, scope='lstm',
-                     weights_initializer=initializer, activation=tf.nn.relu, reuse=reuse)
+                     weights_initializer=initializer, activation=tf.nn.sigmoid, reuse=reuse)
 
         # fully connect the LSTM output to the classes
         graph = slim.fully_connected(graph, num_classes, activation_fn=None, scope='fc1',
@@ -86,9 +96,13 @@ class LSTMEval(Algorithm):
 
     def restore_trained_model(self, projector_file):
         import tensorflow as tf
+        from bob.learn.tensorflow.network import LightCNN9
+
         if self.session is None:
             self.session = tf.Session()
-        data_pl = tf.placeholder(tf.float32, shape=(None,) + tuple(self.input_shape))
+        data_pl = tf.placeholder(tf.float32, shape=(None,) + tuple(self.input_shape), name="data")
+#        network = LightCNN9(n_classes=2, device="/cpu:0")
+#        graph = network(data_pl)
         graph = self.simple_lstm_network(data_pl, batch_size=1,
                                          lstm_cell_size=self.lstm_network_size, num_time_steps=self.num_time_steps,
                                          num_classes=2, reuse=False)
@@ -98,6 +112,7 @@ class LSTMEval(Algorithm):
         #        saver = tf.train.import_meta_graph(projector_file + ".meta", clear_devices=True)
         saver.restore(self.session, projector_file)
         return tf.nn.softmax(graph, name="softmax"), data_pl
+#        return graph, data_pl
 
     def load_projector(self, projector_file):
         logger.info("Loading pretrained model from {0}".format(projector_file))
@@ -111,14 +126,10 @@ class LSTMEval(Algorithm):
         if not self.data_reader:
             self.data_reader = DiskAudio([0], [0], [1] + self.input_shape)
 
-        # normalize the feature using pre-loaded normalization parameters
-        if self.data_std and feature is not None:
-            feature = numpy.divide(feature - self.data_mean, self.data_std)
-
         # split the feature in the sliding window frames
         frames, _ = self.data_reader.split_features_in_windows(features=feature, label=1,
                                                                win_size=self.num_time_steps,
-                                                               sliding_step=5)
+                                                               sliding_step=1)
         logger.info(" .... And frames of shape {0} are extracted to pass into DNN model".format(frames.shape))
         if frames is None:
             return None
@@ -126,16 +137,19 @@ class LSTMEval(Algorithm):
         projections = numpy.zeros((len(frames), 2), dtype=numpy.float32)
         for i in range(frames.shape[0]):
             frame = frames[i]
-            frame = numpy.reshape(frame, ([1] + list(frames[0].shape)))
-            logger.info(" .... projecting frame of shape {0} onto DNN model".format(frame.shape))
+            frame = numpy.reshape(frame, [1] + self.input_shape)
+            # normalize the frame using pre-loaded normalization parameters
+            if self.data_std is not None and self.data_std.all() > 0:
+                frame = numpy.divide(frame - self.data_mean, self.data_std)
+            #logger.info(" .... projecting frame of shape {0} onto DNN model".format(frame.shape))
 
             if self.session is not None:
                 forward_output = self.session.run(self.dnn_model, feed_dict={self.data_placeholder: frame})
                 projections[i] = forward_output[0]
             else:
                 raise ValueError("Tensorflow session was not initialized, so cannot project on DNN model!")
-        logger.info("Projected scores {0}".format(projections))
 
+        logger.info("Projected scores {0}".format(projections))
         return numpy.asarray(projections, dtype=numpy.float32)
 
     def project(self, feature):
