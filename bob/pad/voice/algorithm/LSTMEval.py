@@ -38,18 +38,19 @@ class LSTMEval(Algorithm):
         self.data_std = None
 #        import ipdb
 #        ipdb.set_trace()
+        features_length = input_shape[1]
         if normalization_file and os.path.exists(normalization_file):
             npzfile = numpy.load(normalization_file)
             self.data_mean = npzfile['data_mean']
             self.data_std = npzfile['data_std']
             if not self.data_std.shape:  # if std was saved as scalar
-                self.data_std = numpy.ones(input_shape)
-            if self.data_mean.shape[0] > input_shape[0]:
-                self.data_mean = self.data_mean[:input_shape[0]]
-            self.data_mean = numpy.reshape(self.data_mean, input_shape)
-            if self.data_std.shape[0] > input_shape[0]:
-                self.data_std = self.data_std[:input_shape[0]]
-            self.data_std = numpy.reshape(self.data_std, input_shape)
+                self.data_std = numpy.ones(features_length)
+            # if self.data_mean.shape[0] > input_shape[0]:
+            #     self.data_mean = self.data_mean[:input_shape[0]]
+            # self.data_mean = numpy.reshape(self.data_mean, input_shape)
+            # if self.data_std.shape[0] > input_shape[0]:
+            #     self.data_std = self.data_std[:input_shape[0]]
+            # self.data_std = numpy.reshape(self.data_std, input_shape)
         else:
             self.data_mean = 0
             self.data_std = 1
@@ -74,7 +75,7 @@ class LSTMEval(Algorithm):
 
         # Creating an LSTM network
         graph = lstm(inputs, lstm_cell_size, num_time_steps=num_time_steps, batch_size=batch_size,
-                     output_activation_size=num_classes, scope='lstm',
+                     output_activation_size=num_classes, scope='lstm', name='sync_cell',
                      weights_initializer=initializer, activation=tf.nn.sigmoid, reuse=reuse)
 
         # fully connect the LSTM output to the classes
@@ -126,6 +127,10 @@ class LSTMEval(Algorithm):
         if not self.data_reader:
             self.data_reader = DiskAudio([0], [0], [1] + self.input_shape)
 
+        # normalize the feature using pre-loaded normalization parameters
+        if self.data_std is not None and self.data_std.all() > 0:
+            feature = numpy.divide(feature - self.data_mean, self.data_std)
+
         # split the feature in the sliding window frames
         frames, _ = self.data_reader.split_features_in_windows(features=feature, label=1,
                                                                win_size=self.num_time_steps,
@@ -138,9 +143,6 @@ class LSTMEval(Algorithm):
         for i in range(frames.shape[0]):
             frame = frames[i]
             frame = numpy.reshape(frame, [1] + self.input_shape)
-            # normalize the frame using pre-loaded normalization parameters
-            if self.data_std is not None and self.data_std.all() > 0:
-                frame = numpy.divide(frame - self.data_mean, self.data_std)
             #logger.info(" .... projecting frame of shape {0} onto DNN model".format(frame.shape))
 
             if self.session is not None:
