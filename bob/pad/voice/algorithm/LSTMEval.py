@@ -135,9 +135,11 @@ class LSTMEval(Algorithm):
         frames, _ = self.data_reader.split_features_in_windows(features=feature, label=1,
                                                                win_size=self.num_time_steps,
                                                                sliding_step=1)
-        logger.info(" .... And frames of shape {0} are extracted to pass into DNN model".format(frames.shape))
+#        logger.info(" .... And frames of shape {0} are extracted to pass into DNN model".format(frames.shape))
         if frames is None:
             return None
+
+        logger.info(" .... And frames of shape {0} are extracted to pass into DNN model".format(frames.shape))
 
         projections = numpy.zeros((len(frames), 2), dtype=numpy.float32)
         for i in range(frames.shape[0]):
