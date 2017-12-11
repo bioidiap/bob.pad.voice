@@ -116,7 +116,7 @@ setup(
         ],
 
         'bob.pad.algorithm': [
-            'tensorflow  = bob.pad.voice.algorithm.LSTMEval:algorithm',
+            'tensorflow  = bob.pad.voice.algorithm.TensorflowEval:algorithm',
             'dummy-algo  = bob.pad.voice.algorithm.dummy:algorithm',
             # compute scores based on different energy bands
             'logregr  = bob.pad.voice.algorithm.LogRegr:algorithm',

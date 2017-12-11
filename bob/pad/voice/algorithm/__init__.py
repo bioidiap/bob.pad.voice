@@ -1,6 +1,6 @@
 from .GMM import GMM
 from .LogRegr import LogRegr
-from .LSTMEval import LSTMEval
+from .TensorflowEval import TensorflowEval
 
 # gets sphinx autodoc done right - don't remove it
 def __appropriate__(*args):
@@ -19,6 +19,6 @@ def __appropriate__(*args):
 __appropriate__(
     GMM,
     LogRegr,
-    LSTMEval,
+    TensorflowEval,
     )
 __all__ = [_ for _ in dir() if not _.startswith('_')]
