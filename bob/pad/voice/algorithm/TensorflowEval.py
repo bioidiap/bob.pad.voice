@@ -207,7 +207,11 @@ class TensorflowEval(Algorithm):
                 for feat in feature:
                     feat = numpy.cast['float32'](feat)
                     self._check_feature(feat)
-                    projections.extend(self.project_feature(feat))
+                    projection = self.project_feature(feat)
+                    if projection is not None:
+                        projections.extend(self.project_feature(feat))
+                if len(projections) == 0:
+                    return None
                 return numpy.asarray(projections, dtype=numpy.float32)
             else:
                 feature = numpy.cast['float32'](feature)
