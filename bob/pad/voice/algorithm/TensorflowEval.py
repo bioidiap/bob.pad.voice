@@ -197,9 +197,19 @@ class TensorflowEval(Algorithm):
 
         """
         if len(feature) > 0:
-            feature = numpy.cast['float32'](feature)
-            self._check_feature(feature)
-            return self.project_feature(feature)
+            # if we have a set of independent blocks to process
+            # collect all projections and flatten them in one output array
+            if isinstance(feature, list):
+                projections = []
+                for feat in feature:
+                    feat = numpy.cast['float32'](feat)
+                    self._check_feature(feat)
+                    projections.extend(self.project_feature(feat))
+                return numpy.asarray(projections, dtype=numpy.float32)
+            else:
+                feature = numpy.cast['float32'](feature)
+                self._check_feature(feature)
+                return self.project_feature(feature)
         else:
             return numpy.zeros(1, dtype=numpy.float64)
 
