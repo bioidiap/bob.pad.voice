@@ -209,7 +209,7 @@ class TensorflowEval(Algorithm):
                     self._check_feature(feat)
                     projection = self.project_feature(feat)
                     if projection is not None:
-                        projections.extend(self.project_feature(feat))
+                        projections.extend(projection)
                 if len(projections) == 0:
                     return None
                 return numpy.asarray(projections, dtype=numpy.float32)
