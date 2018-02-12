@@ -17,7 +17,7 @@ import logging
 logger = logging.getLogger("bob.pad.voice")
 
 
-class GmmAlgorithm(Algorithm):
+class GMM(Algorithm):
     """Trains Logistical Regression classifier and projects testing dat on it."""
 
     def __init__(self,
@@ -156,8 +156,8 @@ class GmmAlgorithm(Algorithm):
         real_features = numpy.vstack(training_features[0])
         attack_features = numpy.vstack(training_features[1])
 
-        print ("GmmAlgorithm:train_projector(), real_features shape:", real_features.shape)
-        print ("GmmAlgorithm:train_projector(), attack_features shape:", attack_features.shape)
+        print ("GMM:train_projector(), real_features shape:", real_features.shape)
+        print ("GMM:train_projector(), attack_features shape:", attack_features.shape)
         print ("Min real ", numpy.min(real_features))
         print ("Max real ", numpy.max(real_features))
         print ("Min attack ", numpy.min(attack_features))
@@ -244,4 +244,4 @@ class GmmAlgorithm(Algorithm):
         self.score(toscore)
 
 
-algorithm = GmmAlgorithm()
+algorithm = GMM()

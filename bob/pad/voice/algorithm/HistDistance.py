@@ -18,7 +18,7 @@ import logging
 logger = logging.getLogger("bob.pad.voice")
 
 
-class HistDistanceAlgorithm(Algorithm):
+class HistDistance(Algorithm):
     """This class is used to test all the possible functions of the tool chain, but it does basically nothing."""
 
     def __init__(self, chi_square=False, hist_intersection=True, probab_dist=False, normalize_features=True, **kwargs):
@@ -53,10 +53,10 @@ class HistDistanceAlgorithm(Algorithm):
             raise ValueError("Training projector: features should contain two lists: real and attack!")
 
             # the format is specified in FileSelector.py:training_list() of bob.spoof.base
-        #    print ("HistDistanceAlgorithm:train_projector(), training_features", type(training_features[0][0]))
+        #    print ("HistDistance:train_projector(), training_features", type(training_features[0][0]))
 
         if isinstance(training_features[0][0][0], numpy.ndarray):
-            print ("HistDistanceAlgorithm:train_projector(), features are set of arrays of length: ",
+            print ("HistDistance:train_projector(), features are set of arrays of length: ",
                    len(training_features[0][0][0]))
             real_features = numpy.array([row for feat in training_features[0] for row in feat], dtype=numpy.float64)
             attack_features = numpy.array([row for feat in training_features[1] for row in feat], dtype=numpy.float64)
@@ -64,10 +64,10 @@ class HistDistanceAlgorithm(Algorithm):
             real_features = numpy.array(training_features[0], dtype=numpy.float64)
             attack_features = numpy.array(training_features[1], dtype=numpy.float64)
 
-        # #    print ("HistDistanceAlgorithm:train_projector(), real_features", real_features)
-        # #    print ("HistDistanceAlgorithm:train_projector(), attack_features", attack_features)
-        # print ("HistDistanceAlgorithm:train_projector(), real_features shape:", real_features.shape)
-        # print ("HistDistanceAlgorithm:train_projector(), attack_features shape:", attack_features.shape)
+        # #    print ("HistDistance:train_projector(), real_features", real_features)
+        # #    print ("HistDistance:train_projector(), attack_features", attack_features)
+        # print ("HistDistance:train_projector(), real_features shape:", real_features.shape)
+        # print ("HistDistance:train_projector(), attack_features shape:", attack_features.shape)
         # #    real_features[real_features<-1024] = -1024
         # #    attack_features[attack_features<-1024] = -1024
         # print ("Min real ", numpy.min(real_features))
@@ -135,9 +135,9 @@ class HistDistanceAlgorithm(Algorithm):
                 dist_real = bob.math.histogram_intersection(self.real_mean, feature)
                 dist_attack = bob.math.histogram_intersection(self.attack_mean, feature)
             else:
-                raise ValueError("HistDistanceAlgorithm: please specify the metric for histogram distance")
+                raise ValueError("HistDistance: please specify the metric for histogram distance")
 
-            #      print ("HistDistanceAlgorithm:project(), projection: ", projection)
+            #      print ("HistDistance:project(), projection: ", projection)
             return numpy.array([dist_real, dist_attack], dtype=numpy.float64)
             # return self.machine(feature)
         return numpy.zeros(2, dtype=numpy.float64)
@@ -158,7 +158,7 @@ class HistDistanceAlgorithm(Algorithm):
           The ``feature`` projected into Fisher space.
         """
 
-        print ("HistDistanceAlgorithm:project(), feature shape: ", feature.shape)
+        print ("HistDistance:project(), feature shape: ", feature.shape)
 
         if len(feature) > 0:
             if isinstance(feature[0], numpy.ndarray) or isinstance(feature[0], list):
@@ -170,7 +170,7 @@ class HistDistanceAlgorithm(Algorithm):
 
     def score(self, toscore):
         """Returns the evarage value of the probe"""
-        print("HistDistanceAlgorithm:score() the score: ", toscore)
+        print("HistDistance:score() the score: ", toscore)
 
         # projection is already the score in this case
         if self.probab_dist:
@@ -190,12 +190,12 @@ class HistDistanceAlgorithm(Algorithm):
             return [dist_real - dist_attack]
 
         else:
-            raise ValueError("HistDistanceAlgorithm:scoring() please specify the metric for histogram distance")
+            raise ValueError("HistDistance:scoring() please specify the metric for histogram distance")
 
     def score_for_multiple_projections(self, toscore):
-        print("HistDistanceAlgorithm:score_for_multiple_projections() the score: ", len(toscore))
+        print("HistDistance:score_for_multiple_projections() the score: ", len(toscore))
 
         return numpy.array([self.score(score) for score in toscore], dtype=numpy.float64)
 
 
-algorithm = HistDistanceAlgorithm()
+algorithm = HistDistance()
