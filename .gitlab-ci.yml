@@ -18,7 +18,7 @@ stages:
   stage: build
   before_script:
     - mkdir _ci
-    - curl --silent "https://gitlab.idiap.ch/bob/bob.admin/raw/condapackage/gitlab/install.sh" > _ci/install.sh
+    - curl --silent "https://gitlab.idiap.ch/bob/bob.admin/raw/master/gitlab/install.sh" > _ci/install.sh
     - chmod 755 _ci/install.sh
     - ./_ci/install.sh _ci master #installs ci support scripts
     - ./_ci/before_build.sh
@@ -93,10 +93,6 @@ build_macosx_36:
   variables:
     PYTHON_VERSION: "3.6"
 
-build_macosx_36:
-  <<: *macosx_build_job
-  variables:
-    PYTHON_VERSION: "3.6"
 
 # Deploy targets
 .deploy_template: &deploy_job
