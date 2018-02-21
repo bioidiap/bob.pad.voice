@@ -116,15 +116,15 @@ setup(
         ],
 
         'bob.pad.algorithm': [
-            'tensorflow  = bob.pad.voice.algorithm.tensorflow_algorithm:algorithm',
-            'dummy-algo  = bob.pad.voice.algorithm.dummy_algorithm:algorithm',
+            'tensorflow  = bob.pad.voice.algorithm.TensorflowEval:algorithm',
+            'dummy-algo  = bob.pad.voice.algorithm.dummy:algorithm',
             # compute scores based on different energy bands
-            'logregr  = bob.pad.voice.algorithm.logregr_algorithm:algorithm',
-            'pcalogregr  = bob.pad.voice.config.algorithm.pcalogregr_algorithm:algorithm',
+            'logregr  = bob.pad.voice.algorithm.LogRegr:algorithm',
+            'pcalogregr  = bob.pad.voice.config.algorithm.PCALogRegr:algorithm',
             # the best performing LR classifier:
-            'normlogregr  = bob.pad.voice.config.algorithm.normlogregr_algorithm:algorithm',
-            'histdistance  = bob.pad.voice.algorithm.histdistance_algorithm:algorithm',
-            'gmm  = bob.pad.voice.algorithm.gmm_algorithm:algorithm',
+            'normlogregr  = bob.pad.voice.config.algorithm.NormLogRegr:algorithm',
+            'histdistance  = bob.pad.voice.algorithm.HistDistance:algorithm',
+            'gmm  = bob.pad.voice.algorithm.GMM:algorithm',
             # the same as above but with smaller thresholds
             'gmm-scfc  = bob.pad.voice.config.algorithm.gmm_scfc:algorithm',
         ],

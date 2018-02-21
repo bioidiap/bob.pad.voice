@@ -90,7 +90,7 @@ def test_spoof_EnergyLBP2():
         '-d', 'bob.pad.voice.test.dummy.database.DummyDatabaseSpeechSpoof()',
         '-p', 'bob.bio.spear.preprocessor.Mod_4Hz()',
         '-e', 'bob.pad.voice.extractor.LBPHistograms(features_processor=bob.pad.voice.extractor.SpectrogramExtended())',
-        '-a', 'bob.pad.voice.algorithm.LogRegrAlgorithm()',
+        '-a', 'bob.pad.voice.algorithm.LogRegr()',
         '-vs', 'test_energylbp',
         '--temp-directory', test_dir,
         '--result-directory', test_dir
