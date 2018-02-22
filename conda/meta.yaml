@@ -46,10 +46,12 @@ test:
   requires:
     - bob-devel {{ bob_devel }}.*
     - bob.learn.linear
+    - bob.pad.base
     - nose
     - coverage
     - sphinx
     - sphinx_rtd_theme
+    - scikit-learn
 
 about:
   home: https://www.idiap.ch/software/bob/
