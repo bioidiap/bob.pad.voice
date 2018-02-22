@@ -20,19 +20,18 @@ requirements:
   host:
     - python {{ python }}
     - setuptools {{ setuptools }}
-    - bob.ip.base
-    - bob.bio.base
-    - bob.pad.base
-    - bob.bio.spear
-    - bob.bio.gmm
+    - bob.extension
     - bob.ap
     - bob.io.base
-    - bob.learn.linear
-    - bob.learn.libsvm
+    - bob.ip.base
+    - bob.measure
+    - bob.bio.base
+    - bob.bio.spear
+    - bob.bio.gmm
+    - bob.pad.base
   run:
     - python
     - setuptools
-    - {{ pin_compatible('scikit-learn', min_pin='x.x') }}
 
 test:
   imports:
@@ -49,7 +48,8 @@ test:
     - coverage
     - sphinx
     - sphinx_rtd_theme
-    - gridtk
+    - bob.db.asvspoof
+    - bob.db.avspoof
 
 about:
   home: https://www.idiap.ch/software/bob/

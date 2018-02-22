@@ -1,9 +1,9 @@
 setuptools
-bob.ip.base
-bob.bio.base
-bob.pad.base
-bob.bio.spear
-bob.bio.gmm
 bob.ap
 bob.io.base
-scikit-learn
+bob.ip.base
+bob.measure
+bob.bio.base
+bob.bio.spear
+bob.bio.gmm
+bob.pad.base
