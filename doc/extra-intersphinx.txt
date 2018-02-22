@@ -4,3 +4,6 @@ bob.bio.spear
 gridtk
 bob.db.base
 bob.db.avspoof
+bob.bio.bas
+bob.io.base
+bob.pad.base

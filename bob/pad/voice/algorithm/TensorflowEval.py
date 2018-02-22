@@ -6,11 +6,9 @@
 from bob.pad.base.algorithm import Algorithm
 import numpy
 
-# import tensorflow as tf
 import os
 
 import logging
-
 logger = logging.getLogger("bob.pad.voice")
 
 
@@ -48,14 +46,8 @@ class TensorflowEval(Algorithm):
             self.data_std = numpy.array(npzfile['data_std'])
             if not self.data_std.shape:  # if std was saved as scalar
                 self.data_std = numpy.ones(features_length)
-            # if self.data_mean.shape[0] > input_shape[0]:
-            #     self.data_mean = self.data_mean[:input_shape[0]]
-            # self.data_mean = numpy.reshape(self.data_mean, input_shape)
-            # if self.data_std.shape[0] > input_shape[0]:
-            #     self.data_std = self.data_std[:input_shape[0]]
-            # self.data_std = numpy.reshape(self.data_std, input_shape)
         else:
-            logger.warn("Normalization file '%s' does not exist!" % normalization_file)
+            logger.info("Normalization file '%s' does not exist!" % normalization_file)
             self.data_mean = 0
             self.data_std = 1
 
