@@ -29,7 +29,6 @@ requirements:
     - bob.io.base
     - bob.learn.linear
     - bob.learn.libsvm
-    - scikit-learn
   run:
     - python
     - setuptools
