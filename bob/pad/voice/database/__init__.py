@@ -2,8 +2,6 @@ from .database import PadVoiceFile
 from .asvspoof import ASVspoofPadDatabase
 from .asvspoof2017 import ASVspoof2017PadDatabase
 from .avspoof import AVspoofPadDatabase
-from .replay import ReplayPadDatabase
-from .replaymobile import ReplayMobilePadDatabase
 from .voicepa import VoicePAPadDatabase
 
 # gets sphinx autodoc done right - don't remove it
@@ -24,8 +22,6 @@ __appropriate__(
     PadVoiceFile,
     ASVspoofPadDatabase,
     AVspoofPadDatabase,
-    ReplayPadDatabase,
-    ReplayMobilePadDatabase,
     VoicePAPadDatabase,
     ASVspoof2017PadDatabase,
     )
