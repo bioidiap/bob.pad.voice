@@ -100,12 +100,22 @@ class TensorflowEval(Algorithm):
         data_pl = tf.placeholder(tf.float32, shape=(None,) + tuple(self.input_shape) + (1,), name="data")
 
         # create an empty graph of the correct architecture but with needed batch_size==1
-        if self.architecture_name == 'lstm':
+        # import ipdb; ipdb.set_trace()
+        if self.architecture_name == '3lstm':
+            from bob.learn.tensorflow.network import triple_lstm_network
+            graph = triple_lstm_network(data_pl, batch_size=1,
+                                        lstm_cell_size=self.network_size, num_time_steps=self.num_time_steps,
+                                        num_classes=2, reuse=False)
+        elif self.architecture_name == '2lstm':
+            from bob.learn.tensorflow.network import double_lstm_network
+            graph = double_lstm_network(data_pl, batch_size=1,
+                                        lstm_cell_size=self.network_size, num_time_steps=self.num_time_steps,
+                                        num_classes=2, reuse=False)
+        elif self.architecture_name == 'lstm':
             from bob.learn.tensorflow.network import simple_lstm_network
             graph = simple_lstm_network(data_pl, batch_size=1,
                                         lstm_cell_size=self.network_size, num_time_steps=self.num_time_steps,
                                         num_classes=2, reuse=False)
-
         elif self.architecture_name == 'mlp':
             from bob.learn.tensorflow.network import mlp_network
             graph = mlp_network(data_pl,
