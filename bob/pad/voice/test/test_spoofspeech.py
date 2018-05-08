@@ -8,7 +8,6 @@
 
 from __future__ import print_function
 
-import bob.measure
 
 import os
 import shutil
@@ -44,7 +43,7 @@ def _spoof(parameters, cur_test_dir, sub_dir, score_types=('dev-real',), scores_
         for i in range(0, len(score_types)):
             data2check = []
             for sfile in (score_files[i], reference_files[i]):
-                f = bob.measure.load.open_file(sfile)
+                f = bob.bio.base.score.load.open_file(sfile)
                 d_ = []
                 for line in f:
                     if isinstance(line, bytes): line = line.decode('utf-8')
