@@ -7,7 +7,7 @@
 from __future__ import print_function
 
 import numpy
-import bob.measure
+import bob.bio.base
 import os.path
 
 import bob.core
@@ -22,7 +22,7 @@ def load_noattacks_scores(filename):
   male_pos    = []
 
   # read four column list line by line
-  for (client_id, probe_id, filename, score) in bob.measure.load.four_column(filename):
+  for (client_id, probe_id, filename, score) in bob.bio.base.score.load.four_column(filename):
     if client_id == probe_id:
       if 'female' in filename:
         female_pos.append(score)
@@ -47,7 +47,7 @@ def load_attack_scores(scores_filename, support="all", adevice="all", recdevice=
   negatives = []
 
   # read four column list line by line
-  for (client_id, probe_id, filename, score) in bob.measure.load.four_column(scores_filename):
+  for (client_id, probe_id, filename, score) in bob.bio.base.score.load.four_column(scores_filename):
       if client_id == probe_id:
           # if (support in filename or support == "all") and \
           #       (adevice in filename or adevice == "all") and \
@@ -74,7 +74,7 @@ def scores_to_dict(filename, support="all", adevice="all", recdevice="all"):
   negatives = {}
 
   # read four column list line by line
-  for (client_id, probe_id, filename, score) in bob.measure.load.four_column(filename):
+  for (client_id, probe_id, filename, score) in bob.bio.base.score.load.four_column(filename):
       if client_id == probe_id:
           if (support in filename or support == "all") and \
                 (adevice in filename or adevice == "all") and \
