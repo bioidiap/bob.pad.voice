@@ -30,3 +30,5 @@ class PadVoiceFile(PadFile):
         # We consider there is only 1 channel in the audio file => data[0]
         data = numpy.cast['float'](audio)
         return rate, data
+
+VoicePadFile = PadVoiceFile
