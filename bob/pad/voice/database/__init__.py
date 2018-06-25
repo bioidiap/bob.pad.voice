@@ -1,4 +1,4 @@
-from .database import PadVoiceFile
+from .database import PadVoiceFile, VoicePadFile
 from .asvspoof import ASVspoofPadDatabase
 from .asvspoof2017 import ASVspoof2017PadDatabase
 from .avspoof import AVspoofPadDatabase
@@ -20,6 +20,7 @@ def __appropriate__(*args):
 
 __appropriate__(
     PadVoiceFile,
+    VoicePadFile,
     ASVspoofPadDatabase,
     AVspoofPadDatabase,
     VoicePAPadDatabase,

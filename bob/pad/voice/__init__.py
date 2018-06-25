@@ -8,6 +8,8 @@ The methods for the package
 
 """
 
+from . import algorithm, config, database, extractor, utils
+
 def get_config():
     """
     Returns a string containing the configuration information.
