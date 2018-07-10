@@ -74,3 +74,6 @@ class AVspoofPadDatabase(PadDatabase):
 
         objects = self.__db.objects(protocol=protocol, groups=matched_groups, cls=purposes, **kwargs)
         return [AVspoofPadFile(f) for f in objects]
+
+    def annotations(self, file):
+        return None
