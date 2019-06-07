@@ -36,8 +36,7 @@ class TensorflowEval(Algorithm):
         self.num_time_steps = input_shape[0]
         self.network_size = network_size
         self.data_std = None
-#        import ipdb
-#        ipdb.set_trace()
+
         features_length = input_shape[1]
         if normalization_file and os.path.exists(normalization_file):
             logger.info("Loading normalization file '%s' " % normalization_file)
@@ -240,6 +239,3 @@ class TensorflowEval(Algorithm):
         logger.debug("score() score %f", toscore)
         # return only real score
         return [toscore[0]]
-
-
-algorithm = TensorflowEval()
