@@ -76,6 +76,7 @@ class GMM(Algorithm):
         self.kmeans_trainer = bob.learn.em.KMeansTrainer()
         self.gmm_trainer = bob.learn.em.ML_GMMTrainer(self.update_means, self.update_variances, self.update_weights,
                                                       self.responsibility_threshold)
+        print("This class is deprecated. Please use bob.pad.base.algorithm.GMM instead.")
 
     def _check_feature(self, feature, machine=None, projected=False):
         """Checks that the features are appropriate."""
@@ -242,6 +243,3 @@ class GMM(Algorithm):
     def score_for_multiple_projections(self, toscore):
         """Returns the difference between log likelihoods of being real or attack"""
         self.score(toscore)
-
-
-algorithm = GMM()
