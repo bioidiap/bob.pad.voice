@@ -2,16 +2,14 @@
 .. Pavel Korshunov <pavel.korshunov@idiap.ch>
 .. Thu 23 Jun 13:43:22 2016
 
-.. image:: http://img.shields.io/badge/docs-stable-yellow.png
-   :target: https://www.idiap.ch/software/bob/docs/bob/bob.pad.voice/stable/index.html
-.. image:: http://img.shields.io/badge/docs-latest-orange.png
+.. image:: https://img.shields.io/badge/docs-available-orage.svg
    :target: https://www.idiap.ch/software/bob/docs/bob/bob.pad.voice/master/index.html
-.. image:: https://gitlab.idiap.ch/bob/bob.pad.voice/badges/master/build.svg
+.. image:: https://gitlab.idiap.ch/bob/bob.pad.voice/badges/master/pipeline.svg
+   :target: https://gitlab.idiap.ch/bob/bob.pad.voice/commits/master
+.. image:: https://gitlab.idiap.ch/bob/bob.pad.voice/badges/master/coverage.svg
    :target: https://gitlab.idiap.ch/bob/bob.pad.voice/commits/master
 .. image:: https://img.shields.io/badge/gitlab-project-0000c0.svg
    :target: https://gitlab.idiap.ch/bob/bob.pad.voice
-.. image:: http://img.shields.io/pypi/v/bob.pad.voice.png
-   :target: https://pypi.python.org/pypi/bob.pad.voice
 
 =================================================
 Presentation Attack Detection in Voice Biometrics
