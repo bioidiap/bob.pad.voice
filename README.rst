@@ -2,7 +2,7 @@
 .. Pavel Korshunov <pavel.korshunov@idiap.ch>
 .. Thu 23 Jun 13:43:22 2016
 
-.. image:: https://img.shields.io/badge/docs-available-orage.svg
+.. image:: https://img.shields.io/badge/docs-available-orange.svg
    :target: https://www.idiap.ch/software/bob/docs/bob/bob.pad.voice/master/index.html
 .. image:: https://gitlab.idiap.ch/bob/bob.pad.voice/badges/master/pipeline.svg
    :target: https://gitlab.idiap.ch/bob/bob.pad.voice/commits/master
